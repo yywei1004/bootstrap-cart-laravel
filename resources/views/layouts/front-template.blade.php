@@ -31,7 +31,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/">
                 <img src="https://cf.shopee.tw/file/b7ac5ef08340bf4652c94fb968e67dc1"
                     width="66px" alt="">
             </a>
@@ -54,7 +54,7 @@
                         <a class="nav-link" href="#">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./checkout1.html">
+                        <a class="nav-link" href="checkout1">
                             <i class="fas fa-shopping-cart"></i>
                         </a>
                     </li>

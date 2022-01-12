@@ -39,32 +39,53 @@
                         </div>
                     </div>
                     <hr>
-                    <h4 class="mx-5">訂單明細</h4>
-                    <div class="order-lists">
-                        <div class="order-list">
-                            <div class="order-item d-flex justify-content-between">
-                                <div class="order-item-info w-50 d-flex align-items-center mx-5">
-                                    <img class="w-25" src="./img/pic-1.jpg" alt="">
-                                    <div class="order-product-name ml-5">
-                                        伯爵紅茶
-                                        <!-- <span class="order-product-color" style="color: #415">#41551</span> -->
+                    <form action="/checkout2" method="POST">
+                        @csrf
+                        <h4 class="mx-5">訂單明細</h4>
+                        <div class="order-lists">
+                            @foreach ($shoppingcart as $item)
+                                <div class="order-list">
+                                    <div class="order-item d-flex justify-content-between">
+                                        <div class="order-item-info d-flex align-items-center mx-5">
+                                            <img class="w-25" src="{{ $item->product->imgs[0]->image_path }}"
+                                                alt="">
+                                            <div class="order-product-name ml-5">{{ $item->product->name }}</div>
+                                            <div class="order-item-total d-flex align-items-center ml-auto">
+                                                <div class="order-count w-50">
+                                                    <button type="button" class="order-btn reduce"
+                                                        onclick="mi({{ $item->id }})">-</button>
+                                                    <input type="number" id="product_id{{ $item->id }}"
+                                                        name="product_id[]" value="{{ $item->product->id }}" hidden>
+
+                                                    <input class="order-input w-25" type="number"
+                                                        id="qty{{ $item->id }}" name="qty[]"
+                                                        value="{{ $item->qty }}">
+                                                    <input type="number" id="price{{ $item->id }}" name="price[]"
+                                                        value="{{ $item->price }}" hidden>
+                                                    <input type="number" id="total{{ $item->id }}" name="total[]"
+                                                        value="{{ $item->qty * $item->price }}" hidden>
+                                                    <button type="button" class="order-btn add"
+                                                        onclick="pl({{ $item->id }})">+</button>
+                                                </div>
+                                                <span class="order-item-price sr-only">60</span>
+                                                <div class="order-item-subtotal">$
+                                                    <span
+                                                        id="show{{ $item->id }}">{{ $item->qty * $item->price }}</span>
+                                                </div>
+                                                <div class="delete-btn ml-3" style="cursor: pointer" onclick="deletetocart({{$item->id}})">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <hr class="mx-5">
                                 </div>
-                                <div class="order-item-total d-flex align-items-center w-25">
-                                    <div class="order-count w-50">
-                                        <button class="order-btn reduce">-</button>
-                                        <input class="order-input w-25" type="number" value="1">
-                                        <button class="order-btn add">+</button>
-                                    </div>
-                                    <span class="order-item-price sr-only">60</span>
-                                    <div class="order-item-subtotal">$
-                                        <span>60</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr class="mx-5">
+                            @endforeach
                         </div>
-                        <div class="order-list">
+
+
+
+                        {{-- <div class="order-list">
                             <div class="order-item d-flex justify-content-between">
                                 <div class="order-item-info w-50 d-flex align-items-center mx-5">
                                     <img class="w-25" src="./img/pic-2.jpg" alt="">
@@ -109,11 +130,11 @@
                                 </div>
                             </div>
                             <hr class="mx-5">
-                        </div>
+                        </div> --}}
                         <div class="order-price px-5 mb-3 d-flex flex-column align-items-end">
                             <div class="order-qty">
                                 <span>數量</span>
-                                <span class="qty">5</span>
+                                <span class="qty">{{ count($shoppingcart) }}</span>
                             </div>
                             <div class="order-subtotal">
                                 <span>小計</span>
@@ -125,19 +146,57 @@
                             </div>
                             <div class="order-total">
                                 <span>總計</span>
-                                <span class="total">$ 500</span>
+                                <span class="total"></span>
                             </div>
                             <div class="w-100 d-flex justify-content-between">
-                                <a href="./index.html" class="btn btn-info my-3">回首頁</a>
-                                <a href="./checkout2.html" class="btn btn-info my-3">下一步</a>
+                                <a href="/index" class="btn btn-info my-3">回首頁</a>
+                                <button type="submit" class="btn btn-info my-3">下一步</button>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 @endsection
 @section('js')
-    <script src="./js/checkout.js"></script>
+    {{-- <script src="./js/checkout.js"></script> --}}
+    <script>
+        function mi(id) {
+            if (parseInt(document.querySelector('#qty' + id).value) > 1) {
+                document.querySelector('#qty' + id).value = parseInt(document.querySelector('#qty' + id).value) - 1
+                document.querySelector('#total' + id).value = parseInt(document.querySelector('#qty' + id).value) * document
+                    .querySelector('#price' + id).value
+                document.querySelector('#show' + id).innerHTML = document.querySelector('#total' + id).value
+
+            }
+        }
+
+        function pl(id) {
+            document.querySelector('#qty' + id).value = parseInt(document.querySelector('#qty' + id).value) + 1
+            document.querySelector('#total' + id).value = parseInt(document.querySelector('#qty' + id).value) * document
+                .querySelector('#price' + id).value
+            document.querySelector('#show' + id).innerHTML = document.querySelector('#total' + id).value
+        }
+    </script>
+
+    <script>
+        function deletetocart(shoppingcart_id) {
+            console.log(shoppingcart_id);
+            var formdata = new FormData()
+            formdata.append('_token', ' {{ csrf_token() }}')
+            formdata.append('shoppingcart_id', shoppingcart_id)
+
+            fetch('/deletetocart', {
+                    method: 'POST',
+                    body: formdata
+                })
+                .then(response => response.text())
+                .then(text => {
+                    alert(text)
+                    location.reload()
+                });
+        }
+    </script>
 @endsection

@@ -34,9 +34,15 @@ Route::get('/', function () {
 //     return view('page', compact('title','text','lists'));
 // });
 
-Route::get('/page','NewsController@index');
+
 Route::get('/index','FrontController@index');
+Route::post('/addtocart','FrontController@addtocart');
+Route::post('/deletetocart','FrontController@deletetocart');
 Route::get('/checkout1','FrontController@checkout1');
+Route::post('/checkout2','FrontController@checkout2');
+Route::post('/checkout3','FrontController@checkout3');
+Route::post('/store', 'FrontController@store');
+Route::get('/checkout4/{id}','FrontController@checkout4');
 
 Route::middleware('test')->group(function(){
     Route::get('/blog','BlogController@index');

@@ -31,159 +31,30 @@
 
         <section id="service-2" data-aos="fade-up">
             <div class="container m-auto ">
-                <div class="row justify-content-center border-bottom">
-                    <div class="col-12 col-md-3 p-5">
-                        <div class="Pitchfork-logo text-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-100 h-100" viewBox="0 0 24 24">
-                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-                            </svg>
+                @foreach ($article as $item)
+                    <div class="row justify-content-center border-bottom">
+                        <div class="col-12 col-md-5 p-5">
+                            <h2>{{ $item->title }}</h2>
+                            <p>{{ $item->content }}</p>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5 p-5">
-                        <h2>Shooting Stars</h2>
-                        <p>Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo
-                            juice poutine.</p>
-                        <a class="d-flex">
-                            Learn More
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="row justify-content-center border-bottom">
-                    <div class="col-12 col-md-3 p-5">
-                        <div class="service-logo text-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-100 h-100" viewBox="0 0 24 24">
-                                <circle cx="6" cy="6" r="3"></circle>
-                                <circle cx="6" cy="18" r="3"></circle>
-                                <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5 p-5">
-                        <h2>The Catalyzer</h2>
-                        <p>Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo
-                            juice poutine.</p>
-                        <a class="d-flex">
-                            Learn More
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-3 p-5">
-                        <div class="service-logo text-center">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-100 h-100" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-5 p-5">
-                        <h2>The 400 Blows</h2>
-                        <p>Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo
-                            juice poutine.</p>
-                        <a class="d-flex">
-                            Learn More
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
-                                <path d="M5 12h14M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </section>
         <div class="swiper" id="product-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
+                @foreach ($product as $item)
+                    <div class="swiper-slide">
+                        <div class="mycard">
+                            <img class="w-100" src="{{ $item->imgs[0]->image_path }}" alt="">
+                            <h5>{{ $item->name }}</h5>
+                            <p>售價:{{ $item->price }}</p>
+                            <p>{{ $item->intro }}</p>
+                            <p>庫存:{{ $item->stock }}</p>
+                            <button onclick="addtocart({{ $item->id }})">加入購物車</button>
+                        </div>
                     </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="mycard">
-                        <img class="w-100" src="https://placeholder.pics/svg/460x260" alt="">
-                        <p>CATEGORY</p>
-                        <h5>The Catalyzer</h5>
-                        <p>$16.00</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-prev"></div>
@@ -192,4 +63,22 @@
         </div>
         </section>
     </main>
+@section('js')
+    <script>
+        function addtocart(product_id) {
+            var formdata = new FormData()
+            formdata.append('_token', ' {{ csrf_token() }}')
+            formdata.append('product_id', product_id)
+            fetch('/addtocart', {
+                    method: 'POST',
+                    body: formdata
+                })
+                .then(response => response.text())
+                .catch(error => console.error('Error:', error))
+                .then(text => {
+                    alert(text)
+                });
+        }
+    </script>
+@endsection
 @endsection

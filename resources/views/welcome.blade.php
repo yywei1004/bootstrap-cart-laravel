@@ -89,6 +89,7 @@
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a> --}}
                     {{-- <a href="https://blog.laravel.com">Blog</a> --}}
+                    <a href="/index">Index</a>
                     <a href="/blog">Blog</a>
                     <a href="/products">Products</a>
                     <a href="/user">User</a>
